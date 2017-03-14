@@ -1,0 +1,126 @@
+.TH "busca.h" 3 "Quinta, 13 de Fevereiro de 2014" "Documentação" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+busca.h \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Funções"
+
+.in +1c
+.ti -1c
+.RI "char * \fBcriarFita\fP (char file[100], long *contCaracteres, long *contCaracteresFita)"
+.br
+.ti -1c
+.RI "char * \fBajustarPadrao\fP (char padraoAux[100], int *tamPadrao)"
+.br
+.ti -1c
+.RI "int * \fBcriarPi\fP (char *padrao, int tamPadrao)"
+.br
+.ti -1c
+.RI "void \fBKMP\fP (char *fita, char *padrao, int tamPadrao, long tamFita, long tamCabec)"
+.br
+.ti -1c
+.RI "void \fBBMH\fP (char *fita, char *padrao, int tamPadrao, long tamFita, long tamCabec)"
+.br
+.in -1c
+.SH "Documentação das funções"
+.PP 
+.SS "char* ajustarPadrao (charpadraoAux[100], int *tamPadrao)"
+Função que copia o padrão que será utilizado na busca, para um vetor dinâmico, primeiramente o padrão é inserido em um vetor de caracteres do tamanho 100, esta função aloca um novo vetor que receberá o padrão\&. 
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fIpadraoAux\fP vetor de tamanho 100 que recebe o padrao\&. 
+.br
+\fItamPadrao\fP ponteiro que armazenará o tamanho do vetor que será alocado\&. 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+endereço do vetor de char que foi alocado dinâmicamente, e que contêm o padrão 
+.RE
+.PP
+
+.PP
+Definido na linha 72 do ficheiro busca\&.c\&.
+.SS "void BMH (char *fita, char *padrao, inttamPadrao, longtamFita, longtamCabec)"
+Função que realiza o algoritmo de casamento de padrões BMH, desenvolvidos por Boyer, Moore e Horspool\&. Primeiramente o padrão é processado a procura de sulfixos, depois é realizado uma busca sequencial no padrão através de comparações realizadas da direita para a esquerda, caso haja uma desigualdade o algortimo calcula um salto a ser realizado no texto\&. 
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fI-\fP char * fita - ponteiro que receberá o vetor de caracteres referente ao dna, onde será buscado o padrão\&. 
+.br
+\fIpadrao\fP ponteiro que receberá o vetor de caracteres referente ao padrão\&. 
+.br
+\fItamPadrao\fP variável responsável por armazenar o tamanho do vetor padrão\&. 
+.br
+\fItamFita\fP variável responsável por armazenar o tamanho do vetor fita\&. 
+.br
+\fItamCabec\fP variável que receberá o tamanho do cabeçalho do arquivo onde está armazenado o dna\&. 
+.RE
+.PP
+
+.PP
+Definido na linha 169 do ficheiro busca\&.c\&.
+.SS "char* criarFita (charfile[100], long *contCaracteres, long *contCaracteresFita)"
+Função responsável pela leitura do arquivo texto\&. É criado um vetor dinâmico do tipo char para armazenar todos os caracteres relevantes, descartando o cabeçálho e caracteres desnecessários como o caracter espaço 
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fIfile\fP nome do arquivo que contenha o dna a ser processado\&. 
+.br
+\fIcontCaracteres\fP ponteiro que retornará a quantidade de caracteres lidos no cabeçalho\&. 
+.br
+\fIcontCaracteresFita\fP ponteiro que retornará a quantidade de caracteres relevantes lidos, ou seja o tamanho do vetor de char, que será alocado dinâmicamente\&. 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+retorna o endereço do vetor de caracteres referentes ao dna que será processados\&. 
+.RE
+.PP
+
+.PP
+Definido na linha 18 do ficheiro busca\&.c\&.
+.SS "int* criarPi (char *padrao, inttamPadrao)"
+Função que cria o vetor dinâmico pi que será utilizado para a busca do algoritmo KMP\&. O vetor pi é criado processando o vetor referente ao padrao buscado\&. É procurado dentro do padrão, prefixos, que podem ser utilizados para dar saltos maiores na hora da busca\&. 
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fIpadrao\fP ponteiro que receberá o vetor referente ao padrão que será buscado\&. 
+.br
+\fItamPadrao\fP variável que receberá o tamanho do vetor padrao\&. 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+endereço referente ao vetor de inteiros pi, utilizado no algoritmo KMP\&. 
+.RE
+.PP
+
+.PP
+Definido na linha 92 do ficheiro busca\&.c\&.
+.SS "void KMP (char *fita, char *padrao, inttamPadrao, longtamFita, longtamCabec)"
+Função que realiza o algoritmo de casamento de padrões KMP, desenvolvidos por Knuth, Morris e Pratt\&. Basicamente o algortimo em questão, observa características do padrão, características que podem ser usadas para dar saltos maiores que 1, no texto de busca\&. Quando é detectado o casamento de padrão, é impresso na saída a posição no texto referente ao casamento\&. ao final é impresso o número de comparações necessárias para a busca\&. 
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fIfita\fP ponteiro que receberá o vetor de caracteres referente ao dna, onde será buscado o padrão\&. 
+.br
+\fIpadrao\fP ponteiro que receberá o vetor de caracteres referente ao padrão\&. 
+.br
+\fItamPadrao\fP variável responsável por armazenar o tamanho do vetor padrão\&. 
+.br
+\fItamFita\fP variável responsável por armazenar o tamanho do vetor fita\&. 
+.br
+\fItamCabec\fP variável que receberá o tamanho do cabeçalho do arquivo onde está armazenado o dna\&. 
+.RE
+.PP
+
+.PP
+Definido na linha 131 do ficheiro busca\&.c\&.
+.SH "Autor"
+.PP 
+Gerado automaticamente por Doxygen para Documentação a partir do código fonte\&.
